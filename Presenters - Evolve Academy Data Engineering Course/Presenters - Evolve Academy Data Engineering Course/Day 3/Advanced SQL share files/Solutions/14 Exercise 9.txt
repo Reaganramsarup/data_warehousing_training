@@ -1,0 +1,24 @@
+-- Using the order header table, lets see if a particular truck services more than one location, write a query that does this check
+	select 
+			truck_id, 
+			count(distinct location_id) 
+	FROM HOL_DB.RAW_POS.ORDER_HEADER
+	group by truck_id
+	
+	--Sense Check query
+	select 
+			distinct(location_id) 
+	FROM HOL_DB.RAW_POS.ORDER_HEADER
+	where truck_id = 439
+	
+-- Write a query to check if there are any duplicate records in the trucks table
+	select 
+        truck_id, 
+        count(*) 
+	FROM HOL_DB.RAW_POS.TRUCK
+	group by truck_id
+	having count(*) > 1
+	
+-- Check if there are any trucks that did not make a sale yet
+	SELECT * FROM HOL_DB.RAW_POS.TRUCK
+	WHERE truck_id not in (SELECT distinct truck_id from HOL_DB.RAW_POS.ORDER_HEADER)

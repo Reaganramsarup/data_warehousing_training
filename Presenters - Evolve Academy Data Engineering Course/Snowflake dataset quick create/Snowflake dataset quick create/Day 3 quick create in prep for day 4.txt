@@ -1,0 +1,21 @@
+/* script to create the full warehouse*/
+/* please execute statement 1 and 2 then load date file before proceeding with the rest*/
+
+CREATE OR REPLACE DATABASE SUPPORTING_DATA;
+
+CREATE OR REPLACE TABLE SUPPORTING_DATA.PUBLIC.DATE_TABLE(
+   Id                   INTEGER  NOT NULL PRIMARY KEY
+  ,Date                 DATE  NOT NULL
+  ,DateLongDescription  VARCHAR(50)  NOT NULL
+  ,DateShortDescription VARCHAR(50)  NOT NULL
+  ,DayLongName          VARCHAR(9) NOT NULL
+  ,DayShortName         VARCHAR(3) NOT NULL
+  ,MonthLongName        VARCHAR(9) NOT NULL
+  ,MonthShortName       VARCHAR(3) NOT NULL
+  ,QuarterLongName      VARCHAR(50)  NOT NULL
+  ,QuarterShortName     VARCHAR(2) NOT NULL
+);
+
+/* load date file here using the method in the presentation
+
+screenshot is included in pack. */

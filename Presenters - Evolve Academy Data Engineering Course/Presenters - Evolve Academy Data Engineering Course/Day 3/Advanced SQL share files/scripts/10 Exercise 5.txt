@@ -1,0 +1,8 @@
+CREATE VIEW SUPPORTING_DATA.PUBLIC.SALES_PER_LOCATION AS (
+SELECT  TRUCK_ID,
+        LOCATION_ID,  
+        TO_DATE(ORDER_TS) AS ORDER_DATE, 
+        ORDER_AMOUNT,
+        /*We need to calculate the total order amount per location, per day and have that alongside each order record)*/ AS TOTAL_PER_LOCATION,
+        /*Using the column above, lets try and work out the % that each order contributed to the total*/ AS ORDER_PERCENTAGE_OF_TOTAL
+FROM HOL_DB.RAW_POS.ORDER_HEADER)

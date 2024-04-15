@@ -1,0 +1,7 @@
+select 
+min_temperature_air_2m_f,
+-- add a column here that rounds the number above,
+-- add a column that rounds  the number, so no matter the decimal point it must round up to the next full number,
+-- add a column that rounds down the number, so no matter the decimal point it must round down to the last full number
+from FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.FORECAST_DAY
+limit 100;

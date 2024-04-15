@@ -1,0 +1,66 @@
+-- Stored proc create statement
+
+CREATE OR REPLACE PROCEDURE supporting_data.public.load_date_table(start_date date, end_date date)
+RETURNS VARCHAR NOT NULL
+LANGUAGE SQL
+AS
+BEGIN
+  INSERT INTO SUPPORTING_DATA.PUBLIC.ENHANCED_DATE_TABLE
+(
+   Id                   
+  ,Date                 
+  ,DateLongDescription  
+  ,DateShortDescription 
+  ,DayLongName          
+  ,DayShortName         
+  ,MonthLongName        
+  ,MonthShortName       
+  ,QuarterLongName      
+  ,QuarterShortName     
+  ,IsWeekend            
+  ,YearNumber           
+  ,MonthNumber          
+  ,DayNumber            
+  ,PastYear             
+  ,WeekNumberOfTheYear  
+  ,IsFirstDayOfWeek     
+  ,NumberOfDaysFromNow  
+)
+
+select 
+   Id                   
+  ,Date                 
+  ,DateLongDescription  
+  ,DateShortDescription 
+  ,DayLongName          
+  ,DayShortName         
+  ,MonthLongName        
+  ,MonthShortName       
+  ,QuarterLongName      
+  ,QuarterShortName     
+  ,CASE WHEN dayshortname IN ('Sat', 'Sun') THEN 'Y' ELSE 'N' END as IsWeekend            
+  ,year(Date) as YearNumber           
+  ,month(Date) as MonthNumber          
+  ,day(Date) as DayNumber            
+  ,dateadd(year,-1,Date) as PastYear             
+  ,week(Date) as WeekNumberOfTheYear  
+  ,CASE WHEN dayshortname = 'Mon' THEN 'Y' ELSE 'N' END as IsFirstDayOfWeek     
+  ,datediff(day, Date, current_timestamp) as NumberOfDaysFromNow  
+from SUPPORTING_DATA.PUBLIC.DATE_TABLE
+WHERE Date BETWEEN :start_date and :end_date;
+
+RETURN 'Load is complete';
+END;
+
+--Lets truncate the enhanced date table
+
+TRUNCATE TABLE SUPPORTING_DATA.PUBLIC.ENHANCED_DATE_TABLE;
+
+--Lets make sure its empty
+SELECT * FROM SUPPORTING_DATA.PUBLIC.ENHANCED_DATE_TABLE;
+
+--Now lets run the stored proc
+CALL supporting_data.public.load_date_table ('2015-01-01', '2023-11-19');
+
+--Lets see if the procedure loaded our table:
+SELECT * FROM SUPPORTING_DATA.PUBLIC.ENHANCED_DATE_TABLE;

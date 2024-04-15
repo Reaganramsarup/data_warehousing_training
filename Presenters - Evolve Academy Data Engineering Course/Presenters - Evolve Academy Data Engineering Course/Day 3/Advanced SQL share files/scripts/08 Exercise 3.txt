@@ -1,0 +1,17 @@
+SELECT 
+OD.ORDER_ID,
+OD.DISCOUNT_ID, --All null discount ID's must be made -1 
+OD.ORDER_ITEM_DISCOUNT_AMOUNT,-- All null discount amounts must be made 0
+OD.ORDER_TS, --This field is currently a timestamp, the client wants a date field 
+/* the client wants to see the order amount with the currency appended in front of it. 
+Both the order_currency field and the order_amount field is in the order header table*/ AS ORDER_AMOUNT_WITH_CURR,
+M.MENU_ITEM_NAME,
+M.MENU_ITEM_NAME AS IS_WATER, -- this should be a true or false column. if the word water exists in the menu item name, it should be true otherwise it should be false
+M.MENU_ITEM_NAME AS UPDATED_NAME, -- The client wants us to change the word water if it exists in the menu item name to H2O
+M.MENU_ITEM_NAME AS MENU_SHORT_NAME --The client wants us to only take the first 5 characters of the menu item name here. 
+FROM HOL_DB.RAW_POS.ORDER_DETAIL OD
+JOIN HOL_DB.RAW_POS.ORDER_HEADER OH
+ON OD.ORDER_ID = OH.ORDER_ID
+JOIN HOL_DB.RAW_POS.MENU M
+ON OD.MENU_ITEM_ID = M.MENU_ITEM_ID
+LIMIT 100;

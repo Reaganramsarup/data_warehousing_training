@@ -1,0 +1,6 @@
+-- Using the order header table, lets see if a particular truck services more than one location, 
+   write a query that does this check
+
+-- Write a query to check if there are any duplicate records in the trucks table
+
+-- Check if there are any trucks that did not make a sale yet

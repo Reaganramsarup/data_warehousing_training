@@ -1,0 +1,3 @@
+select t.* from HOL_DB.RAW_POS.TRUCK t
+WHERE exists (select 1 from HOL_DB.RAW_POS.MENU m
+where t.menu_type_id = m.menu_type_id)

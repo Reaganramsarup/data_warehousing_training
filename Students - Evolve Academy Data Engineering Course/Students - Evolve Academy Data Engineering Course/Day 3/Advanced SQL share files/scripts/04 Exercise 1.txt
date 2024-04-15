@@ -1,0 +1,5 @@
+select * from HOL_DB.RAW_POS.MENU
+where menu_item_name = 'Bottled Water'
+
+select * from HOL_DB.RAW_POS.TRUCK
+limit 100

@@ -1,0 +1,17 @@
+-- Lets first create a view
+CREATE VIEW SUPPORTING_DATA.PUBLIC.CUSTOMER_SPEND
+AS 
+SELECT 
+        CUSTOMER_ID, 
+        SUM(ORDER_AMOUNT) AS SPEND_AMOUNT
+FROM HOL_DB.RAW_POS.ORDER_HEADER
+WHERE CUSTOMER_ID IS NOT NULL
+GROUP BY CUSTOMER_ID
+
+--Try to do the caluclation
+SELECT 
+        CUSTOMER_ID, 
+        SPEND_AMOUNT,
+        /*Give each like of this table a Unique number from the highest spend amount to lowest*/ UNIQE_NUMBER,
+        /*Rank customers based on their spend and put the highest spenders first*/  SPEND_LEVEL
+FROM SUPPORTING_DATA.PUBLIC.CUSTOMER_SPEND

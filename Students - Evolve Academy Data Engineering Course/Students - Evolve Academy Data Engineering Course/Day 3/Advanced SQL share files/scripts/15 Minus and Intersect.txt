@@ -1,0 +1,23 @@
+ - lets look at what trucks service these two locations
+ select distinct truck_id, location_id
+from HOL_DB.RAW_POS.ORDER_HEADER
+WHERE location_id in (12655, 11387)
+order by truck_id;
+
+--Do any trucks exclusivily service location 12655?
+select truck_id
+from HOL_DB.RAW_POS.ORDER_HEADER
+where location_id = 12655
+minus
+select truck_id
+from HOL_DB.RAW_POS.ORDER_HEADER
+where location_id = 11387
+
+--Which trucks service both locations:
+select truck_id
+from HOL_DB.RAW_POS.ORDER_HEADER
+where location_id = 12655
+intersect
+select truck_id
+from HOL_DB.RAW_POS.ORDER_HEADER
+where location_id = 11387

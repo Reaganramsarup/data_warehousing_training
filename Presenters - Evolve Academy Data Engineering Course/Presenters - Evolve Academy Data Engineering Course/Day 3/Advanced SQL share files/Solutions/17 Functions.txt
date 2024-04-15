@@ -1,0 +1,18 @@
+-- Creation of the scalar function
+  CREATE FUNCTION supporting_data.public.vat_amount(amount NUMBER(38,4))
+  RETURNS NUMERIC(11,2)
+  AS
+  $$
+    amount * 0.15
+  $$
+  ;
+  
+--Now lets use the function
+  SELECT 
+        location_id, 
+        truck_id, 
+        customer_id, 
+        order_amount,
+        supporting_data.public.vat_amount(order_amount) as vat_amount
+  FROM HOL_DB.RAW_POS.ORDER_HEADER
+  limit 100;

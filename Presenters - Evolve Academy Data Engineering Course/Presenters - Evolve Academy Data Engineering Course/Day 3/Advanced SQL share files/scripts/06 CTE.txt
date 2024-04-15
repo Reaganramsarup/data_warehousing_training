@@ -1,0 +1,11 @@
+with wa_trucks as (
+    select * from HOL_DB.RAW_POS.TRUCK
+    where ISO_REGION = 'WA'
+),
+beverage_menu as (
+    select * from HOL_DB.RAW_POS.MENU
+    WHERE item_category = 'Beverage'
+)
+Select t.truck_id, t.primary_city, bm.menu_item_name from wa_trucks t
+join beverage_menu bm
+on t.menu_type_id = bm.menu_type_id

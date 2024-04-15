@@ -1,0 +1,3 @@
+select * from HOL_DB.RAW_POS.TRUCK
+WHERE menu_type_id IN (select menu_type_id from HOL_DB.RAW_POS.MENU
+where menu_item_name = 'Bottled Water')

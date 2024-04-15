@@ -1,0 +1,9 @@
+SELECT 
+        ORDER_ID, 
+        CUSTOMER_ID, 
+        ORDER_TS, 
+        ORDER_AMOUNT,
+        /*Get the order amount of the last transaction that the client did before this one*/  LAST_ORDER_AMOUNT,
+        /*Calculate the percentage difference between this order and the last order*/ ORDER_PERC_DIFF
+FROM HOL_DB.RAW_POS.ORDER_HEADER
+WHERE CUSTOMER_ID IS NOT NULL

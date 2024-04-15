@@ -1,0 +1,71 @@
+-- Repository to Fork From:
+https://github.com/Snowflake-Labs/sfguide-data-engineering-with-snowpark-python
+
+--configure snowflake account 
+~/.snowsql/config
+
+--If anaconda not setup run below:
+conda activate snowflake-demo
+
+-- Navigate to steps
+cd steps
+
+-- run the python script
+python 02_load_raw.py
+
+--Frostbyte name
+FROSTBYTE_WEATHERSOURCE
+
+--Run python script 04
+python 04_create_pos_view.py 
+
+--navigate to the 05 folder and run function
+cd 05_fahrenheit_to_celsius_udf
+python app.py 35
+
+--Create function
+snow function create
+
+--Run function
+snow function execute -f "fahrenheit_to_celsius_udf(35)"
+
+
+--Navigate back to steps
+cd ..
+
+--navigate to the 06 folder
+cd 06_orders_update_sp
+
+--Create the orders proc
+snow procedure create
+
+--Run the procedure
+snow procedure execute -p "orders_update_sp()"
+
+--Navigate back to steps
+cd ..
+
+--navigate to the 07 folder
+cd 07_daily_city_metrics_update_sp
+
+--Create the orders proc
+snow procedure create
+
+--Run the proc
+snow procedure execute -p "daily_city_metrics_update_sp()"
+
+--Update Fahrenheit to celsius calc
+import sys
+from scipy.constants import convert_temperature
+
+def main(temp_f: float) -> float:
+    return convert_temperature(float(temp_f), 'F', 'C')
+	
+--Requirements file should contain this
+scipy
+
+--Install requirements
+pip install -r requirements.txt
+
+--Run python app locally
+python app.py 35

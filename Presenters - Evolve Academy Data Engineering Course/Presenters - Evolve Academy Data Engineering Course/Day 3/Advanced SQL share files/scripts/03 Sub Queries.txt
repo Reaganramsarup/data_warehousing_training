@@ -1,0 +1,4 @@
+select count(*) 
+FROM(
+		select distinct PRIMARY_CITY from HOL_DB.RAW_POS.TRUCK
+	);

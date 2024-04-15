@@ -1,0 +1,7 @@
+select 
+min_temperature_air_2m_f,
+round(min_temperature_air_2m_f) as rounded,
+floor(min_temperature_air_2m_f) as round_up,
+ceil(min_temperature_air_2m_f) as round_down
+from FROSTBYTE_WEATHERSOURCE.ONPOINT_ID.FORECAST_DAY
+limit 100;

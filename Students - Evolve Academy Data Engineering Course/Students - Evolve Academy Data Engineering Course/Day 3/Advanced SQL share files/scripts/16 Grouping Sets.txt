@@ -1,0 +1,12 @@
+SELECT 
+        location_id, 
+        truck_id, 
+        customer_id, 
+        sum(order_amount) 
+FROM HOL_DB.RAW_POS.ORDER_HEADER
+where customer_id is not null
+and location_id in (11387, 12655)
+group by rollup(location_id, truck_id, customer_id)
+order by location_id, 
+        truck_id, 
+        customer_id

@@ -1,0 +1,65 @@
+CREATE OR REPLACE TABLE SUPPORTING_DATA.PUBLIC.ENHANCED_DATE_TABLE(
+   Id                   INTEGER  NOT NULL PRIMARY KEY
+  ,Date                 DATE  NOT NULL
+  ,DateLongDescription  VARCHAR(50)  NOT NULL
+  ,DateShortDescription VARCHAR(50)  NOT NULL
+  ,DayLongName          VARCHAR(9) NOT NULL
+  ,DayShortName         VARCHAR(3) NOT NULL
+  ,MonthLongName        VARCHAR(9) NOT NULL
+  ,MonthShortName       VARCHAR(3) NOT NULL
+  ,QuarterLongName      VARCHAR(50)  NOT NULL
+  ,QuarterShortName     VARCHAR(2) NOT NULL
+  ,IsWeekend            VARCHAR(1)
+  ,YearNumber           INT
+  ,MonthNumber          INT
+  ,DayNumber            INT
+  ,PastYear             DATE
+  ,WeekNumberOfTheYear  INT
+  ,IsFirstDayOfWeek     VARCHAR(1)
+  ,NumberOfDaysFromNow  INT
+  
+);
+
+
+INSERT INTO SUPPORTING_DATA.PUBLIC.ENHANCED_DATE_TABLE
+(
+   Id                   
+  ,Date                 
+  ,DateLongDescription  
+  ,DateShortDescription 
+  ,DayLongName          
+  ,DayShortName         
+  ,MonthLongName        
+  ,MonthShortName       
+  ,QuarterLongName      
+  ,QuarterShortName     
+  ,IsWeekend            
+  ,YearNumber           
+  ,MonthNumber          
+  ,DayNumber            
+  ,PastYear             
+  ,WeekNumberOfTheYear  
+  ,IsFirstDayOfWeek     
+  ,NumberOfDaysFromNow  
+)
+
+select 
+   Id                   
+  ,Date                 
+  ,DateLongDescription  
+  ,DateShortDescription 
+  ,DayLongName          
+  ,DayShortName         
+  ,MonthLongName        
+  ,MonthShortName       
+  ,QuarterLongName      
+  ,QuarterShortName     
+  /*states a Y or N flag if this is a weekend*/, as IsWeekend            
+  /*The year number as an integer for example 2023-01-30 will have a value of 2023*/, as YearNumber           
+  /*The month number as an integer for example 2023-01-30 will have a value of 1*/, as MonthNumber          
+  /*The day number as an integer for example 2023-01-30 will have a value of 30*/, as DayNumber            
+  /*This field holds the same date last year*/, as PastYear             
+  /*This field contains what week number out of 52 this date falls within*/, as WeekNumberOfTheYear  
+  /*Identify if this is the first day of the week*/, as IsFirstDayOfWeek     
+  /*This stores the number of days from the date compared to when this load was processed*/, as NumberOfDaysFromNow  
+from SUPPORTING_DATA.PUBLIC.DATE_TABLE;

@@ -1,0 +1,6 @@
+SELECT  CUSTOMER_ID,
+        ORDER_TS, 
+        ORDER_AMOUNT,
+        /*Calculate a rolling total of order amount*/ AS ROLLING_TOTAL
+FROM HOL_DB.RAW_POS.ORDER_HEADER
+WHERE CUSTOMER_ID IS NOT NULL
